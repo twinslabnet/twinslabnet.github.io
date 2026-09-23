@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Available Domains — Twinslab</title>
+	<meta name="description" content="Available my.id domains from Twinslab.">
+	<style>
+		:root { --bg:#080b12; --panel:#101621; --line:#202b3b; --text:#edf3ff; --muted:#8c9ab0; --accent:#69e6b0; --accent-2:#68a7ff; }
+		* { box-sizing:border-box; }
+		body { margin:0; min-height:100vh; color:var(--text); background:radial-gradient(circle at 85% 0%,#153552 0,transparent 32rem),var(--bg); font:15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif; }
+		a { color:inherit; text-decoration:none; }
+		.wrap { width:min(1120px,calc(100% - 40px)); margin:auto; }
+		header { display:flex; justify-content:space-between; align-items:center; padding:28px 0; border-bottom:1px solid var(--line); }
+		.brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.03em; font-size:20px; }
+		.mark { display:grid; place-items:center; width:34px; height:34px; border:1px solid var(--accent); border-radius:10px; color:var(--accent); font-weight:900; }
+		nav { color:var(--muted); font-size:13px; } nav a:hover { color:var(--accent); }
+		main { padding:76px 0 90px; }
+		.eyebrow { color:var(--accent); font:12px ui-monospace,SFMono-Regular,monospace; letter-spacing:.14em; text-transform:uppercase; }
+		h1 { max-width:700px; margin:12px 0 16px; font-size:clamp(40px,7vw,78px); line-height:1; letter-spacing:-.07em; }
+		.intro { max-width:580px; color:var(--muted); font-size:17px; }
+		.toolbar { display:flex; gap:12px; align-items:center; margin:42px 0 22px; }
+		input { width:min(100%,430px); padding:14px 17px; color:var(--text); background:var(--panel); border:1px solid var(--line); border-radius:10px; outline:0; font:inherit; }
+		input:focus { border-color:var(--accent-2); box-shadow:0 0 0 3px #68a7ff20; }
+		.count { margin-left:auto; color:var(--muted); font:12px ui-monospace,monospace; }
+		.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; }
+		.domain { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:16px 17px; background:linear-gradient(135deg,#111925,#0d131d); border:1px solid var(--line); border-radius:10px; transition:.2s ease; }
+		.domain:hover { transform:translateY(-2px); border-color:#426987; background:#142031; }
+		.domain span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+		.domain b { color:var(--accent); font-weight:500; opacity:.7; }
+		.empty { display:none; padding:30px; color:var(--muted); text-align:center; border:1px dashed var(--line); border-radius:10px; }
+		footer { padding:25px 0; color:var(--muted); border-top:1px solid var(--line); font-size:13px; }
+		@media (max-width:600px) { .wrap{width:min(100% - 28px,1120px)} header{padding:20px 0} nav{display:none} main{padding:55px 0 65px} .toolbar{align-items:stretch; flex-direction:column} .count{margin-left:0} }
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<header><a class="brand" href="index.html"><span class="mark">T</span><span>twinslab<span style="color:var(--accent)">.net</span></span></a><nav><a href="index.html">← Back to home</a></nav></header>
+		<main>
+			<div class="eyebrow">// available domains</div>
+			<h1>Find your next<br><span style="color:var(--accent)">my.id</span></h1>
+			<p class="intro">A curated collection of short, memorable domains for builders, creators, and the people who make things happen.</p>
+			<div class="toolbar"><input id="search" type="search" placeholder="Search domains..." aria-label="Search domains"><span class="count" id="count"></span></div>
+			<section class="grid" id="domains" aria-label="Available domains"></section>
+			<div class="empty" id="empty">No matching domains found.</div>
+		</main>
+		<footer>© Twinslab · Available domains</footer>
+	</div>
+	<script>
+		const names = [...new Set(`startwith builtby ownedby createdby poweredby writtenby runby foundby bornin fromme formike withme thisisme hi yo there again runit chmod dhcp bitnex nexgrid nexstack bitcore techcore bitnest technest itsmine iamme meetme seeit readit gotit useit runthis trythis lookthis seehere startnow worksforme worksnow broken false boolean sudoagain rooted rootuser rootaccess rootedhere shellme bashme commandline fstab mount umount grepme catme lsme packetme routeit routeme networked linkup unicast multicast packetflow`.split(' '))];
+		const grid = document.querySelector('#domains'), search = document.querySelector('#search'), count = document.querySelector('#count'), empty = document.querySelector('#empty');
+		function render() { const query = search.value.toLowerCase().trim(); const matches = names.filter(n => (n + '.my.id').includes(query)); grid.innerHTML = matches.map(n => `<a class="domain" href="https://${n}.my.id"><span>${n}<b>.my.id</b></span><b>↗</b></a>`).join(''); count.textContent = `${matches.length} / ${names.length} domains`; empty.style.display = matches.length ? 'none' : 'block'; }
+		search.addEventListener('input', render); render();
+	</script>
+</body>
+</html>
